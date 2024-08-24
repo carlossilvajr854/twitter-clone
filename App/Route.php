@@ -7,11 +7,16 @@ class Route extends Bootstrap
 {
     protected function initRoutes()
     {
-        $routes["home"] = array(
+        $routes["home"] = [
             "route" => "/",
             "controller" => "indexController",
             "action" => "index"
-        );
+        ];
+        $routes["inscreverse"] = [
+            "route" => "/inscreverse",
+            "controller" => "indexController",
+            "action" => "inscreverse"
+        ];
 
         $this->setRoutes($routes);
     }
