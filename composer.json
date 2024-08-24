@@ -1,0 +1,18 @@
+{
+    "name": "app/miniframework",
+    "require": {
+        "php": ">= 7.0"
+    },
+    "authors": [
+        {
+            "name": "Carlos de Oliveira",
+            "email": "carlossilvajr854@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "MF\\": "vendor/MF/"
+        }
+    }
+}
