@@ -8,7 +8,7 @@ class Connection
     public static function getDb()
     {
         $host = "localhost";
-        $dbname = "";
+        $dbname = "twitter-clone";
         $charset = "utf8";
         $user = "root";
         $pass = "";
