@@ -9,11 +9,21 @@ class AppController extends Action
 {
     public function timeline()
     {
-        if ($usuario->__get("id") != '' && $usuario->__get("nome") != '') {
-            session_start();
+        session_start();
 
-            print_r($_SESSION);
-            echo "chegamos até aqui!";
+        if (!empty($_SESSION["id"]) && !empty($_SESSION["nome"])) {
+            $this->render("timeline");
+        } else {
+            header("Location: /?login=erro");
+        }
+    }
+
+    public function tweet()
+    {
+        session_start();
+
+        if (!empty($_SESSION["id"]) && !empty($_SESSION["nome"])) {
+            $tweet = Container::getModel("Tweet");
         } else {
             header("Location: /?login=erro");
         }
