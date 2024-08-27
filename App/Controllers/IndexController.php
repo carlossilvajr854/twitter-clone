@@ -9,6 +9,7 @@ class IndexController extends Action
 {
     public function index()
     {
+        $this->view->login = $_GET["login"] ?? "";
         $this->render("index");
     }
     public function inscreverse()
