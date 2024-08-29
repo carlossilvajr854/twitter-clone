@@ -36,4 +36,18 @@ class AppController extends Action
         $tweet->__set("id_usuario", $_SESSION["id"]);
         $tweet->salvar();
     }
+
+    public function quemSeguir()
+    {
+        $this->validaAutenticacao();
+
+        $pesquisarPor = $_GET["pesquisarPor"] ?? "";
+
+        if ($pesquisarPor != "") {
+            echo "<br/><br/><br/><br/>";
+            echo "Pesquisando por: $pesquisarPor";
+        }
+
+        $this->render("quemSeguir");
+    }
 }
