@@ -44,9 +44,12 @@ class AppController extends Action
         $pesquisarPor = $_GET["pesquisarPor"] ?? "";
 
         if ($pesquisarPor != "") {
-            echo "<br/><br/><br/><br/>";
-            echo "Pesquisando por: $pesquisarPor";
+            $usuario = Container::getModel("Usuario");
+            $usuario->__set("nome", $pesquisarPor);
+            $usuarios = $usuario->getAll();
         }
+
+        $this->view->usuarios = $usuarios ?? [];
 
         $this->render("quemSeguir");
     }
