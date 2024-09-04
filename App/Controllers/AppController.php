@@ -79,4 +79,13 @@ class AppController extends Action
         }
         header("Location: /quem_seguir");
     }
+
+    public function removerTweet()
+    {
+        $this->validaAutenticacao();
+
+        echo "<pre>";
+        print_r($_GET);
+        echo "</pre>";
+    }
 }

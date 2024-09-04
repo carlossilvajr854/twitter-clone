@@ -46,6 +46,15 @@ class Tweet extends Model
                 t.id_usuario = u.id
             WHERE
                 t.id_usuario = :id_usuario
+                OR
+                t.id_usuario IN(
+                    SELECT 
+                        id_usuario_seguindo 
+                    FROM 
+                        usuarios_seguidores 
+                    WHERE 
+                        id_usuario = :id_usuario
+                )
             ORDER BY
                 t.id DESC";
         $stmt = $this->db->prepare($query);
