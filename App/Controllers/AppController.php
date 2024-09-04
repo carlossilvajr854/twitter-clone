@@ -84,8 +84,8 @@ class AppController extends Action
     {
         $this->validaAutenticacao();
 
-        echo "<pre>";
-        print_r($_GET);
-        echo "</pre>";
+        $tweet = Container::getModel("Tweet");
+        $tweet->__set("id", $_GET["id"]);
+        $tweet->removeTweet();
     }
 }
