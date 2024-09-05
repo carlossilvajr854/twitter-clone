@@ -24,6 +24,15 @@ class AppController extends Action
         $tweet->__set("id_usuario", $_SESSION["id"]);
 
         $this->view->tweets = $tweet->getAll();
+
+        $usuario = Container::getModel("Usuario");
+        $usuario->__set("id", $_SESSION["id"]);
+
+        $this->view->info_usuario = $usuario->getInfoUsuario();
+        $this->view->total_tweets = $usuario->getTotalTweets();
+        $this->view->total_seguindo = $usuario->getTotalSeguindo();
+        $this->view->total_seguidores = $usuario->getTotalSeguidores();
+
         $this->render("timeline");
     }
 
