@@ -29,7 +29,32 @@ class Tweet extends Model
         header("Location: /timeline");
     }
 
-    public function getAll()
+    public function getTotalRegistros()
+    {
+        $query = "
+            SELECT 
+                COUNT(*) AS total_registros 
+            FROM 
+                tweets
+            WHERE
+                id_usuario = :id_usuario
+                OR
+                id_usuario IN(
+                    SELECT 
+                        id_usuario_seguindo 
+                    FROM 
+                        usuarios_seguidores 
+                    WHERE 
+                        id_usuario = :id_usuario
+                )
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(":id_usuario", $this->__get("id_usuario"));
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getPorPagina($limit, $offset)
     {
         $query = "
             SELECT 
@@ -56,12 +81,18 @@ class Tweet extends Model
                         id_usuario = :id_usuario
                 )
             ORDER BY
-                t.id DESC";
+                t.id DESC
+            LIMIT 
+                $limit
+            OFFSET 
+                $offset
+        ";
         $stmt = $this->db->prepare($query);
-        $stmt->bindValue("id_usuario", $this->__get("id_usuario"));
+        $stmt->bindValue(":id_usuario", $this->__get("id_usuario"));
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
     public function removeTweet()
     {
         $query = "DELETE FROM tweets WHERE id = :id";
